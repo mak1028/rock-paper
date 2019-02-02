@@ -1,0 +1,92 @@
+<DOCTYPE! html>
+<html>
+  <head>
+    <title>Rock, Paper, Scissors</title>
+  </head>
+<body>
+  <script>
+
+let play
+let comp
+pScore=0
+cScore=0
+
+    function humanPlay(){
+        play = prompt("What is your choice? ")
+        return play
+    }
+
+    function computerPlay(){
+        let compPlay = ["Rock", "Paper", "Scissors"]
+        compPlay = compPlay[Math.floor(Math.random()*compPlay.length)]
+        return compPlay
+    }
+
+    function playRound(playerSelection, computerSelection){
+        switch(playerSelection){
+            case 'paper':
+            switch (computerSelection){
+                case 'rock':
+                    return "You win; paper beats rock";
+                    break;
+                case 'scissors':
+                    return "You lose; scissors beat paper";
+                    break;
+                default:
+                    return 'tie'
+            }
+
+            case 'rock':
+            switch (computerSelection){
+                case 'paper':
+                    return 'You lose; paper beats rock';
+                    break;
+                case 'scissors':
+                    return 'you win rock beats scissors';
+                    break;
+                default:
+                    return 'tie'
+            }
+
+            case 'scissors':
+            switch (computerSelection){
+                case 'paper':
+                    return 'you win scissors beats paper';
+                    break;
+                case 'rock':
+                    return 'you lose rock beats scissors';
+                    break;
+                default:
+                    return 'tie'
+            }
+        }
+    }
+
+    function playGame(){
+        for (let round = 0; round<5; round++){
+            play = humanPlay()
+            console.log(play)
+            comp = computerPlay()
+            console.log(comp)
+            console.log(playRound(play.toLowerCase(), comp.toLowerCase()))
+            let win = playRound(play.toLowerCase(), comp.toLowerCase())
+            if (win == 'You win; paper beats rock' || win == 'you win rock beats scissors' || win == 'you win scissors beats paper'){
+                pScore++
+            }
+            else if(win == 'You lose; scissors beat paper' || win == 'You lose; paper beats rock' || win == 'you lose rock beats scissors') {
+                cScore++
+            }
+            else if (win == 'Tie' || win == 'tie'){
+                cScore++
+                pScore++
+            }
+        }
+
+    }
+
+playGame()   
+console.log('player score=' + pScore)
+console.log('computer score=' + cScore)
+    </script>
+</body>
+</html>
